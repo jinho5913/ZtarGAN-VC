@@ -1,6 +1,6 @@
 # ZeroShot StarGAN-VC
 
-#### 모델 
+#### 모델 설명
 ZeroShot Learning이 가능한 StarGAN-VC 제안
 1. 소리의 고유 정보를 손상시킬 수 있는 MCEP 대신 Mel-Spectrogram을 사용하여 소리 정보 손실 최소화
 2. `Speaker Encoder`를 통해 모든 화자의 고유한 소리의 특징 정보 반영
