@@ -1,0 +1,95 @@
+{
+    "src_spk":"2634",
+    "trg_spk":"4022",
+    "prefix":null,
+    "model":{
+        "lambda_rec":10,
+        "lambda_gp":10,
+        "lambda_cls":10,
+        "sampling_rate":22050
+    },
+    "vocoder": {
+        "model": "HiFi-GAN",
+        "speaker": "universal"
+    },
+    "train":{
+        "batch_size":32,
+        "num_iters":200000,
+        "num_iters_decay":100000,
+        "g_lr":0.0001,
+        "d_lr":0.0001,
+        "n_critic":5,
+        "beta1":0.5,
+        "beta2":0.999,
+        "resume_iters":null
+    },
+    "test":{
+        "test_iters":100000
+    },
+    "miscellaneous":{
+        "num_workers":null,
+        "mode":"train"
+    },
+    "preprocessing":{
+        "audio":{
+            "sampling_rate": 22050,
+            "max_wav_value": 32768.0
+        },
+        "stft": {
+            "filter_length": 1024,
+            "hop_length": 256,
+            "win_length": 1024
+        },
+        "mel":{
+            "n_mel_channels":80,
+            "mel_fmin":0,
+            "mel_fmax":8000
+        }
+    },
+    "directories":{
+        "train_data_dir":"../../preprocessed_data/mel_train",
+        "test_data_dir":"../../preprocessed_data/mel_test",
+        "wav_dir":"../../preprocessed_data/mel_train",
+        "log_dir":"./output/log",
+        "model_save_dir":"./output/ckpt",
+        "sample_dir":"./output/samples"
+    },
+    "step":{
+        "log_step":10,
+        "sample_step":100,
+        "model_save_step":100,
+        "lr_update_step":1000
+    },
+    "speaker_encoder":{
+        "encoder":"lstm",
+        "ckpt_path":"../../ckpt/speaker_encoder_000720.pt",
+        "config":{
+            "model":{
+                "model_hidden_size": 256,
+                "model_embedding_size": 256,
+                "model_num_layers": 3,
+                "learning_rate_init": 1e-4,
+                "speakers_per_batch": 64,
+                "utterances_per_speaker": 10
+            },
+            "data":{
+                "mel":{
+                    "mel_window_length": 1024,
+                    "mel_window_step": 256,
+                    "mel_n_channels": 80
+                },
+                "audio":{
+                    "sampling_rate": 22050,
+                    "partials_n_frames": 160,
+                    "inference_n_frames": 80,
+                    "audio_norm_target_dBFS": -30
+                },
+                "voice_activation_detection":{
+                    "vad_window_length": 1024,
+                    "vad_moving_average_width": 8,
+                    "vad_max_silence_length": 6
+                }
+            }
+        }
+    }
+}

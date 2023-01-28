@@ -1,0 +1,31 @@
+{
+    "resample_rate":0,
+    "data_split":{
+        "perform_data_split":"y",
+        "origin_wavpath":"../../raw_data/wav",
+        "target_wavpath":"../../raw_data/wav",
+        "origin_wavpath_train":null,
+        "origin_wavpath_eval":null,
+        "target_wavpath_train":null,
+        "target_wavpath_eval":null,
+        "mel_dir_train_default":"../../preprocessed_data/mel_train",
+        "mel_dir_test_default":"../../preprocessed_data/mel_test"
+    },
+    "Mel_preprocess":{
+        "mel_dir_train":"../../preprocessed_data/mel_train",
+        "mel_dir_test":"../../preprocessed_data/mel_test",
+        "stft":{
+            "filter_length":1024,
+            "hop_length":256,
+            "win_length":1024
+        },
+        "mel":{
+            "n_mel_channels":80,
+            "mel_fmin":0,
+            "mel_fmax":8000
+        },
+        "audio":{
+            "sampling_rate":22050
+        }
+    }
+}

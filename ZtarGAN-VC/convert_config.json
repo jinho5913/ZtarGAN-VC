@@ -1,0 +1,69 @@
+{
+    "dataset":"aihub",
+    "model":{
+        "num_converted_wavs":1,
+        "resume_iters":6000,
+        "src_spk":"0027",
+        "trg_spk":"0347"
+    },
+    "directories":{
+        "train_data_dir":"../../preprocessed_data/mel_train",
+        "test_data_dir":"../../preprocessed_data/mel_test",
+        "wav_dir":"../../wav",
+        "log_dir":"./output/log",
+        "model_save_dir":"./output/ckpt",
+        "convert_dir":"./converted/6000step"
+    },
+    "vocoder": {
+        "model": "HiFi-GAN",
+        "speaker": "universal"
+    },
+    "preprocessing":{
+        "audio":{
+            "sampling_rate": 22050,
+            "max_wav_value": 32768.0
+        },
+        "stft": {
+            "filter_length": 1024,
+            "hop_length": 256,
+            "win_length": 1024
+        },
+        "mel":{
+            "n_mel_channels":80,
+            "mel_fmin":0,
+            "mel_fmax":8000
+        }
+    },
+    "speaker_encoder":{
+        "encoder":"lstm",
+        "ckpt_path":"../../ckpt/se_1300_aihub.pt",
+        "config":{
+            "model":{
+                "model_hidden_size": 256,
+                "model_embedding_size": 256,
+                "model_num_layers": 3,
+                "learning_rate_init": 1e-4,
+                "speakers_per_batch": 64,
+                "utterances_per_speaker": 10
+            },
+            "data":{
+                "mel":{
+                    "mel_window_length": 1024,
+                    "mel_window_step": 256,
+                    "mel_n_channels": 80
+                },
+                "audio":{
+                    "sampling_rate": 22050,
+                    "partials_n_frames": 160,
+                    "inference_n_frames": 80,
+                    "audio_norm_target_dBFS": -30
+                },
+                "voice_activation_detection":{
+                    "vad_window_length": 30,
+                    "vad_moving_average_width": 8,
+                    "vad_max_silence_length": 6
+                }
+            }
+        }
+    }
+}
